@@ -40,18 +40,23 @@
 		#cooling-cells = <2>;
 	};
 
-	gpio-keys-polled {
+	front-panel-restart {
 		compatible = "gpio-keys-polled";
 		poll-interval = <100>;
 
-		pwr-btn {
-			label = "pwr-btn";
-			linux,code = <KEY_POWER>;
+		restart-btn {
+			label = "restart-btn";
+			linux,code = <KEY_RESTART>;
 			gpios = <&gpio GPIOA_11 GPIO_ACTIVE_LOW>;
 		};
+	};
 
-		rst-btn {
-			label = "rst-btn";
+	back-rst {
+		compatible = "gpio-keys-polled";
+		poll-interval = <100>;
+
+		factory-reset-btn {
+			label = "factory-reset-btn";
 			linux,code = <KEY_RESTART>;
 			gpios = <&gpio GPIOA_10 GPIO_ACTIVE_LOW>;
 		};
@@ -269,7 +274,7 @@
 &cpu_thermal {
 	trips {
 		cpu_active: cpu-active {
-			temperature = <60000>; /* millicelsius */
+			temperature = <50000>; /* millicelsius */
 			hysteresis = <5000>; /* millicelsius */
 			type = "active";
 		};
